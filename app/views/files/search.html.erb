@@ -1,21 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="Finn Kinnear">
-    <link rel="icon" href="../../favicon.ico">
-
-    <title>Colenso</title>
-
-  </head>
-
-  <body>
-
-    <div class="container">
+<div class="container">
 
       <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -55,20 +38,13 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+    
+<h1>Search Results</h1>
 
-      <!-- Jumbotron -->
-      <div class="jumbotron">
-        <h1>Colenso</h1>
-        <p class="lead">Welcome to the Colenso document database.</p>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Explore</a></p>
-      </div>
+<ul class="list-group">
+<% @search_result.each do |link| %>
+  <li class="list-group-item"><%= link_to(link, link) %></li>
+  <% end %>
+</ul>
 
-    </div> <!-- /container -->
-  </body>
-</html>
-
-
-<%= form_tag('/search', :method => "get", id: "search-form") do %>
-	<%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
-	<%= submit_tag "Search" %>
-<% end %>
+</div> <!-- /container -->
