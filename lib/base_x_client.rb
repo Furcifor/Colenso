@@ -9,6 +9,16 @@ require 'socket'
 require 'digest/md5'
 
 module BaseXClient
+  HOST = 'localhost'
+  PORT = 1984
+  USERNAME = 'admin'
+  PASSWORD = 'admin'
+
+  def self.session
+    @session ||= Session.new(HOST, PORT, USERNAME, PASSWORD)
+  end
+
+
   class Session
     def initialize(host, port, username, pw)
 
