@@ -1,14 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Colenso</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+	<title>Colenso</title>
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= csrf_meta_tags %>
 </head>
 <body>
 
+	<div class="container">
+
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/files">Colenso</a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li class="active"><%= link_to("Files", "/all_files") %> <span class="sr-only">(current)</span></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Search Options <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="/files?search_type=text">Text String</a></li>
+								<li><a href="/files?search_type=XPath">XPath</a></li>
+								<li><a href="/files?search_type=XQuery">XQuery</a></li>
+							</ul>
+						</li>
+					</ul>
+
+					<%= form_tag('/search', :method => "get", class: 'navbar-form navbar-left', id: "search-form") do %>
+						<div class="form-group">
+							<% if @search_type == 'XQuery' %>
+								<%= text_field_tag :search, params[:search], placeholder: "Xquery Search", class: 'form-control' %>
+							<% elsif @search_type == 'XPath' %>
+								<%= text_field_tag :search, params[:search], placeholder: "XPath Search", class: 'form-control' %>
+							<% else %>
+								<%= text_field_tag :search, params[:search], placeholder: "Text Search", class: 'form-control' %>
+							<% end %>
+
+							<%= hidden_field_tag(:search_type, @search_type) %>
+							
+							<%= submit_tag "Search", class: 'btn btn-default' %>
+						</div>
+					<% end %>
+
+					<ul class="nav navbar-nav navbar-right">
+						<% if current_page?('/view_document') %>
+							<li><%= link_to('Download', "/download?path=#{@path}") %></li>
+						<% end %>
+						<li><%= link_to("Add Document", "/add") %></li>
+					</ul>
+				</div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
+		</nav>
+
 <%= yield %>
+
+</div>
 
 </body>
 </html>

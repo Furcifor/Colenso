@@ -1,0 +1,11 @@
+<div id="xml-upload-form">
+  <h1>Add Document</h1>
+  <p>Upload an xml file directly to the Colenso database, by choosing the file and it's destination.</code></p>
+  <%= form_tag({action: :upload_document}, multipart: true) do %>
+    <div class="cp-file-add-input ac-mg-y-10">
+      <%= text_field_tag(:addition_path, params[:addition_path], size: 150, placeholder: "Path of document to add", class: 'form-control') %>
+      <%= file_field_tag :xml, class: 'btn btn-default', id: 'btn-file' %>
+      <%= submit_tag "Upload Document Here", class:"btn btn-default"  %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,11 @@
+<h1>All Files</h1>
+
+<ul class="list-group">
+<% @results.each do |link| %>
+  <li class="list-group-item">
+  	<%= link_to(link, "/view_document?path=#{link}") %>
+  </li>
+  <% end %>
+</ul>
+
+</div> <!-- /container -->
